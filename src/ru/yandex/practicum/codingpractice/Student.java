@@ -6,4 +6,4 @@ public class Student extends StudentGroup{
     public Student (String name, String groupName, ) {
         students.add()
     }
-}
+}343434
