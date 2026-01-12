@@ -1,24 +1,42 @@
 package ru.yandex.practicum.codingpractice;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Book> books = new ArrayList<>();
-        Comparator<Book> bookPageCountComparator = new BookPageCountComparator();
-        Comparator<Book> bookYearComparator = new BookYearComparator();
+    public static void main (String[] args) {
+        Map<String, LocalDateTime> historyOfOrders = new LinkedHashMap<>(16, 0_75, true);
+        addItem(historyOfOrders, "Футболка");
+        addItem(historyOfOrders, "Шорты");
+        addItem(historyOfOrders, "Носки");
+        addItem(historyOfOrders, "Ботинки");
+        addItem(historyOfOrders, "Кепка");
+        getHistory(historyOfOrders);
+    }
 
-        books.add(new Book("Чепчун", "Мася", 1488, Genre.HORROR, 92));
-        books.add(new Book("Апельсин", "Баська", 1590, Genre.DRAMA, 105));
-        books.add(new Book("Баськин домик", "Чепчик", 2025, Genre.ROMANTIC, 240));
-        books.add(new Book("Гойда", "Улитка", 690, Genre.THRILLER, 44));
-        System.out.println("ДО СОРТИРОВКИ:");
-        System.out.println(books);
-        System.out.println("СОРТИРОВКА ПО ЖАНРУ:");
-        books.sort(Comparator.comparing(Book::getGenre));
-        System.out.println(books);
+    public static void getRecentViews(Map<String, LocalDateTime> items, int n) {
+        for (int i = 0; i <= n; i++) {
+            for (String item : items.keySet()) {
+                System.out.println(item);
+            }
+        }
+    }
+
+    public static void addItem(Map<String, LocalDateTime> items, String item) {
+        if (items.containsKey(item)) {
+            items.replace(item, LocalDateTime.now());
+        } else {
+            items.put(item, LocalDateTime.now());
+        }
+    }
+
+    public static void getHistory(Map<String, LocalDateTime> items) {
+        for (int i = 0; i < 3; i++) {
+            for (String item : items.keySet()) {
+                System.out.println(item + " = " + items.get(item));
+            }
+        }
     }
 }
