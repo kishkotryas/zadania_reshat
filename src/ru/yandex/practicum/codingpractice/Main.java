@@ -1,27 +1,26 @@
 package ru.yandex.practicum.codingpractice;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        divideNums();
+        System.out.println(parseUserInput("erer"));
     }
 
-    static void divideNums () {
-        Scanner scanner = new Scanner(System.in);
+    static int parseUserInput (String input) {
         try {
-            System.out.println("Введите первое число...");
-            int firstNum = scanner.nextInt();
-            System.out.println("Введите второе число...");
-            int secondNum = scanner.nextInt();
-            System.out.println(firstNum / secondNum);
-        } catch (ArithmeticException arithmetic) {
-            System.out.println("Ошибка: деление на ноль.");
-        } catch (InputMismatchException mismatch) {
-            System.out.println("Ошибка: введены не числовые значения.");
-        } catch (RuntimeException runtime) {
-            System.out.println("Произошла неопределенная ошибка!");
+            int num = Integer.parseInt(input);
+            if (num >= 1 && num <= 100) {
+                return num;
+            } else {
+                throw new IllegalArgumentException("Ошибка: число не входит в диапазон (1-100)");
+            }
+        } catch (NumberFormatException number) {
+            throw new IllegalArgumentException("Ошибка: некорректный ввод числа");
         }
     }
 }
