@@ -8,7 +8,9 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Person person1 = new Person("Алиса", 0);
+        BankAccount account = new BankAccount();
+
+        account.withdraw(-3);
     }
 }
 
